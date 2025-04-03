@@ -129,7 +129,9 @@ function judgedash() {
           <div className="mt-4 text-lg font-semibold">Case Title: {d.case_title}</div>
           <div className="mt-6 font-semibold">Case Description:</div>
           <textarea className="overflow-hidden px-3.5 pt-3.5 pb-20 mt-3.5 border border-black shadow w-full resize-none bg-white" value={d.case_desc || ""} readOnly />
+          <div className="text-lg ">Update hearing date:</div>
           <input type="text" className="px-3.5 py-2 mt-2 border border-black shadow w-full bg-white" placeholder={hearr.hear} onChange={(e) => setHear({ ...hearr, hear: e.target.value })} />
+          <div className="text-lg ">Status update:</div>
           <input type="text" className="px-3.5 py-2 mt-2 border border-black shadow w-full bg-white" placeholder={hearr.stat} onChange={(e) => setHear({ ...hearr, stat: e.target.value })} />
           <div className="flex gap-4 mt-6">
             <button className="px-6 py-3 text-white bg-black rounded-lg" onClick={hr}>Back</button>

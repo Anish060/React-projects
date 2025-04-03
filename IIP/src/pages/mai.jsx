@@ -27,7 +27,7 @@ function mai() {
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2d8b4bef737cb7ff5cbce430470872bb0d13693"
                   alt=""
                 />
-                <Link to="/login">
+                <Link to="/loginA">
                 <div className="px-5 py-2 text-2xl text-white bg-black rounded-2xl">
                   Admin
                 </div>

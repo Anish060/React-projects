@@ -31,7 +31,7 @@ export default function usersentview() {
       </div>
     </div>
     <div className="flex overflow-hidden flex-col items-start self-end px-10 py-8 mt-16 w-full rounded-lg border border-black border-solid max-w-[502px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-10 max-md:max-w-full">
-      <div>User Name: A1</div>
+      <div>User Name:{item.username}</div>
       <div className="mt-9">
         Context: {item.Context}
       </div>

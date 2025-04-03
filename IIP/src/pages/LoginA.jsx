@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 
-export default function Login() {
+export default function LoginA() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ export default function Login() {
   localStorage.setItem("userEmail", email);
 
   useEffect(() => {
-    fetch("http://localhost:8081/u_info")
+    fetch("http://localhost:8081/a_info")
       .then((res) => res.json())
       .then((dataa) => {
         console.log("Fetched data:", dataa); // ✅ Debugging
@@ -40,7 +40,7 @@ export default function Login() {
       
       
       alert("Login successful!");
-      navigate("/user",{state:{email}});
+      navigate("/admin",{state:{email}});
     } else {
       alert("Invalid credentials");
     }
@@ -117,3 +117,4 @@ export default function Login() {
     </div>
   );
 }
+

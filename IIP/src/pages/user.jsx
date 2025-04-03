@@ -1,13 +1,23 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function user() {
+  const location = useLocation();
+  const email = location.state?.email || localStorage.getItem("userEmail");
+
+  const [law, setLaw] = useState([]);
+  
+
+  // Fetch lawyer details on mount
+
   const [conte,setConte]=useState({
     contextt:"",
     issu:"",
-    catt:""
+    catt:"",
+    name:email
   })
+  
  
   async function geans() {
     try {
@@ -28,13 +38,14 @@ export default function user() {
 
   const handleSubmit = async () => {
     try {
+      //setConte( { ...conte, name:email })
       const category = await geans();  // Wait for AI category
       const updatedConte = { ...conte, catt: category };  // Create a new object with updated category
       
       const response = await axios.post("http://localhost:8081/sen", updatedConte);
       console.log("Response:", response.data);
 
-      setConte({ contextt: "", issu: "", catt: "" });  // Clear input only on success
+      setConte({ contextt: "", issu: "", catt: "" ,name:email});  // Clear input only on success
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
     }
@@ -54,6 +65,9 @@ export default function user() {
           </Link>
           <div className="text-base text-black">Response</div>
           <div className="ml-auto text-base text-black">Send</div>
+           <Link to="/">
+                    <div className="gap-2.5 pl-2.5 text-base text-black">Log out</div>
+                    </Link>
         </div>
       </div>
       <div className="flex flex-col gap-6 p-6 mx-auto w-full max-w-[600px]">
@@ -74,7 +88,7 @@ export default function user() {
             onChange={(e)=>setConte({...conte,issu:e.target.value})}
           />
         </div>
-        <Link to="/usersent">
+        <Link to="/usersent" state={{email}}>
         <button className="p-3 w-full text-base rounded-lg bg-stone-900 text-neutral-100" onClick={ handleSubmit}>
           Submit
         </button>
