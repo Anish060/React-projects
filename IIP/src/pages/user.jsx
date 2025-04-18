@@ -15,7 +15,8 @@ export default function user() {
     contextt:"",
     issu:"",
     catt:"",
-    name:email
+    name:email,
+    emo:""
   })
   
  
@@ -29,6 +30,24 @@ export default function user() {
         },
       });
 
+
+      return response.data.candidates[0].content.parts[0].text;
+    } catch (error) {
+      console.log(error);
+      return "Unknown";  // Return a fallback category in case of error
+    }
+  }
+  async function geans1() {
+    try {
+      const response = await axios({
+        url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAgaxmNhCv8mD4OoUijls12OVMev3t82Kc",
+        method: "post",
+        data: {
+          contents: [{ parts: [{ text: conte.issu + "  from 0 to 10 provide a value for this message based on sentiment analysis and integrity of the request for a government based petition just give the number alone the more emotional or sad it is the higher the value and only for more emotional cases and needs immediate action gets more value compared to others and also make sure that there is a slight difference between previous values dont hesitate to give 0" }] }],
+        },
+      });
+      
+
       return response.data.candidates[0].content.parts[0].text;
     } catch (error) {
       console.log(error);
@@ -39,61 +58,90 @@ export default function user() {
   const handleSubmit = async () => {
     try {
       //setConte( { ...conte, name:email })
+      const emoval=await geans1();
       const category = await geans();  // Wait for AI category
-      const updatedConte = { ...conte, catt: category };  // Create a new object with updated category
+      const updatedConte = { ...conte, catt: category ,emo: emoval};  // Create a new object with updated category
       
       const response = await axios.post("http://localhost:8081/sen", updatedConte);
       console.log("Response:", response.data);
 
-      setConte({ contextt: "", issu: "", catt: "" ,name:email});  // Clear input only on success
+      setConte({ contextt: "", issu: "", catt: "" ,name:email,emo:""});  // Clear input only on success
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
     }
   };
   
   return (
-    <div className="flex flex-col bg-white min-h-[screen]">
-      <div className="flex gap-1 items-center p-2.5 border border-b">
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/223f4f43b00bf6d9de1545efb7107a8b5ae7317d"
-          alt=""
-          className="w-[42px] h-[42px]"
-        />
-        <div className="flex flex-1 gap-11 items-center">
-          <Link to="/usersent">
-          <div className="text-base text-black">Sent</div>
-          </Link>
-          <div className="text-base text-black">Response</div>
-          <div className="ml-auto text-base text-black">Send</div>
-           <Link to="/">
-                    <div className="gap-2.5 pl-2.5 text-base text-black">Log out</div>
-                    </Link>
+    <div className="relative min-h-screen bg-gradient-to-br from-[#f0f4ff] to-[#d2e0ff] overflow-hidden">
+  {/* Background image layer */}
+  <div className="absolute inset-0 z-0 before:absolute before:inset-0 before:bg-[url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1470&q=80')] before:bg-cover before:bg-center before:opacity-20 before:blur-sm before:animate-fadeIn" />
+
+  <div className="relative z-10 flex flex-col min-h-screen">
+    {/* Header */}
+    <div className="flex gap-4 items-center px-6 py-4 bg-white shadow-md">
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/223f4f43b00bf6d9de1545efb7107a8b5ae7317d"
+        alt="Logo"
+        className="h-12 w-auto"
+      />
+      <div className="flex gap-10 items-center flex-1 text-lg font-semibold text-gray-700">
+        <Link to="/usersent" className="hover:underline transition">Sent</Link>
+        <div className="hover:underline cursor-default">Response</div>
+        <div className="ml-auto flex gap-6">
+          <div className="hover:underline cursor-default">Send</div>
+          <Link to="/" className="hover:underline">Log out</Link>
         </div>
-      </div>
-      <div className="flex flex-col gap-6 p-6 mx-auto w-full max-w-[600px]">
-        <div className="flex flex-col gap-2">
-          <div className="text-base text-stone-900">Context</div>
-          <input
-            type="text"
-            placeholder="Value"
-            className="px-4 py-3 w-full text-base bg-white rounded-lg border border-solid border-zinc-300 text-zinc-400"
-            onChange={(e)=>setConte({...conte,contextt:e.target.value})}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <div className="text-base text-stone-900">Issue</div>
-          <textarea
-            placeholder="Value"
-            className="px-4 py-3 w-full text-base bg-white rounded-lg border border-solid resize-none border-zinc-300 min-h-20 text-zinc-400"
-            onChange={(e)=>setConte({...conte,issu:e.target.value})}
-          />
-        </div>
-        <Link to="/usersent" state={{email}}>
-        <button className="p-3 w-full text-base rounded-lg bg-stone-900 text-neutral-100" onClick={ handleSubmit}>
-          Submit
-        </button>
-        </Link>
       </div>
     </div>
+
+    {/* Form Content */}
+    <div className="flex flex-col gap-6 p-6 w-full max-w-[600px] mx-auto mt-12 bg-white/90 backdrop-blur-md rounded-3xl border border-gray-300 shadow-lg">
+      {/* Context */}
+      <div className="flex flex-col gap-2">
+        <label className="text-base text-gray-800 font-medium">Context</label>
+        <input
+          type="text"
+          placeholder="e.g., Hostel maintenance"
+          className="px-4 py-3 text-base rounded-lg border border-slate-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+          onChange={(e) => setConte({ ...conte, contextt: e.target.value })}
+        />
+      </div>
+
+      {/* Issue */}
+      <div className="flex flex-col gap-2">
+        <label className="text-base text-gray-800 font-medium">Issue</label>
+        <textarea
+          placeholder="Describe your issue here..."
+          className="px-4 py-3 text-base rounded-lg border border-slate-300 min-h-[100px] resize-none text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+          onChange={(e) => setConte({ ...conte, issu: e.target.value })}
+        />
+      </div>
+
+      {/* Submit Button */}
+      <Link to="/usersent" state={{ email }}>
+        <button
+          onClick={handleSubmit}
+          className="w-full py-3 text-base font-semibold bg-black text-white rounded-lg hover:bg-gray-800 transition"
+        >
+          Submit
+        </button>
+      </Link>
+    </div>
+  </div>
+
+  {/* Animation style */}
+  <style>
+    {`
+      @keyframes fadeIn {
+        0% { opacity: 0; transform: scale(1.02); }
+        100% { opacity: 0.2; transform: scale(1); }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 2.5s ease-in-out forwards;
+      }
+    `}
+  </style>
+</div>
+
   )
 }

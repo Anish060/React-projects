@@ -8,7 +8,7 @@ export default function usersentview() {
         return <div className="text-center mt-10 text-red-500">No data available.</div>;
       }
   return (
-    <div className="flex overflow-hidden flex-col pr-20 pb-32 text-base leading-snug text-black bg-white max-w-[705px] max-md:pr-5 max-md:pb-24">
+    <div className="flex overflow-hidden flex-col pr-20 pb-32 text-base leading-snug text-black bg-white max-w-[705px] max-md:pr-5 max-md:pb-24 ">
     <div className="flex gap-1 items-center max-w-full whitespace-nowrap w-[333px]">
       <div className="flex flex-col justify-center items-start self-stretch p-2.5 my-auto min-w-60 w-[262px]">
         <div className="flex gap-10 items-center mr-0 w-full min-h-[42px]">

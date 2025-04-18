@@ -46,75 +46,90 @@ export default function LoginA() {
     }
   };
   return (
-    <div>
-      <div className="flex flex-col w-full bg-white min-h-[screen]">
-        <div className="flex gap-4 items-center p-3">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/223f4f43b00bf6d9de1545efb7107a8b5ae7317d"
-            alt=""
-            className="w-[42px] h-[42px]"
-          />
-          <div className="flex gap-4 items-center max-sm:hidden">
-            <a href="#" className="text-base text-black underline">
-              About
-            </a>
-            <a href="#" className="text-base text-black underline">
-              Contatct us
-            </a>
-          </div>
-        </div>
-        <div className="flex flex-col gap-2 items-center px-10 py-14">
-          <div className="text-xs text-center text-black underline">
-            Smart Pettition
-          </div>
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-6 p-6 bg-white rounded-lg border border-[solidpx] min-w-80"
-          >
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-base text-stone-900">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Value"
-                className="flex-1 px-4 py-3 text-base leading-4 bg-white rounded-lg border border-solid border-slate-300 min-w-60 text-zinc-400"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="password" className="text-base text-stone-900">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Value"
-                className="flex-1 px-4 py-3 text-base leading-4 bg-white rounded-lg border border-solid border-slate-300 min-w-60 text-zinc-400"
-              />
-            </div>
-            <div className="flex gap-4 items-center">
-              
-              <button
-                type="submit"
-                className="flex-1 gap-2 p-3 text-base leading-4 bg-black rounded-lg border-black border-[solidpx] text-neutral-100"
-                onClick={handleLogin}
-              >
-                Log In
-              </button>
-          
-            </div>
-            <a href="#" className="text-base underline text-stone-900">
-              Forgot password?
-            </a>
-          </form>
+    <div className="relative min-h-screen bg-gradient-to-br from-[#f0f4ff] to-[#d2e0ff] overflow-hidden">
+    {/* Background image */}
+    <div className="absolute inset-0 z-0 before:absolute before:inset-0 before:bg-[url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1470&q=80')] before:bg-cover before:bg-center before:opacity-20 before:blur-sm before:animate-fadeIn" />
+  
+    {/* Main content */}
+    <div className="relative z-10 flex flex-col min-h-screen">
+      {/* Header */}
+      <div className="flex justify-between items-center px-6 py-4 bg-white shadow-md">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/223f4f43b00bf6d9de1545efb7107a8b5ae7317d"
+          alt="Logo"
+          className="h-12 w-auto"
+        />
+        <div className="flex gap-6 items-center max-sm:hidden text-lg font-semibold text-gray-700">
+          <a href="#" className="hover:underline transition">About</a>
+          <a href="#" className="hover:underline transition">Contact us</a>
         </div>
       </div>
+  
+      {/* Login Form */}
+      <div className="flex flex-col items-center justify-center px-4 py-16 flex-grow">
+        <h1 className="text-2xl font-bold text-gray-800 underline mb-6">Smart Petition</h1>
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md p-8 bg-white/90 backdrop-blur-md border border-gray-300 rounded-2xl shadow-xl flex flex-col gap-6"
+        >
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="text-base text-gray-700 font-medium">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="px-4 py-3 text-base rounded-lg border border-slate-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+            />
+          </div>
+  
+          <div className="flex flex-col gap-2">
+            <label htmlFor="password" className="text-base text-gray-700 font-medium">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              className="px-4 py-3 text-base rounded-lg border border-slate-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+            />
+          </div>
+  
+          <button
+            type="submit"
+            className="bg-black text-white py-3 rounded-lg text-base font-semibold hover:bg-gray-800 transition"
+            onClick={handleLogin}
+          >
+            Log In
+          </button>
+  
+          <a href="#" className="text-sm text-gray-700 underline text-center">
+            Forgot password?
+          </a>
+        </form>
+      </div>
     </div>
+  
+    {/* Tailwind fade animation */}
+    <style>
+      {`
+        @keyframes fadeIn {
+          0% { opacity: 0; transform: scale(1.02); }
+          100% { opacity: 0.2; transform: scale(1); }
+        }
+  
+        .animate-fadeIn {
+          animation: fadeIn 2.5s ease-in-out forwards;
+        }
+      `}
+    </style>
+  </div>
+  
   );
 }
 

@@ -78,8 +78,8 @@ const hr=()=>{
  setP(0);
 }
   return (
-    <div className="p-2.5 w-full bg-white min-h-[screen]">
-    <div className="flex flex-col w-full bg-white shadow-sm h-[955px] max-w-[1371px]">
+    <div className="p-2.5 w-full bg-white min-h-[screen] ">
+    <div className="flex flex-col w-full bg-white shadow-sm h-[955px] max-w-[1371px] p-2.5 w-full bg-white min-h-[screen] absolute inset-0 z-0 before:absolute before:inset-0 before:bg-[url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1470&q=80')] before:bg-cover before:bg-center before:opacity-20 before:blur-sm before:animate-fadeIn before:z-[-1] ">
       <div className="flex gap-1 items-center p-2.5">
         <div className="flex gap-11 items-center">
           <img
@@ -89,9 +89,7 @@ const hr=()=>{
           />
           <div className="text-base text-black">Sent</div>
           <div className="gap-2.5 text-base text-black">Response</div>
-          <Link to="/user">
-          <div className="gap-2.5 pl-2.5 text-base text-black">Send</div>
-          </Link>
+          
           <Link to="/">
           <div className="gap-2.5 pl-2.5 text-base text-black">Log out</div>
           </Link>
@@ -147,6 +145,7 @@ const hr=()=>{
                 <th className="p-3 border border-black">User</th>
                 <th className="p-3 border border-black">Context</th>
                 <th className="p-3 border border-black">Status</th>
+                <th className="p-3 border border-black">Sentimental analysis</th>
                 <th className="p-3 border border-black">View</th>
               </tr>
             </thead>
@@ -161,6 +160,7 @@ const hr=()=>{
       <td className="p-3 border border-black">{item.username || "N/A"}</td>
       <td className="p-3 border border-black">{item.Context || "N/A"}</td>
       <td className="p-3 border border-black">{(item.Status==='A')?"Approved":(item.Status==="R")?"Rejected":"Pending" || "N/A"}</td>
+      <td className="p-3 border border-black">{item.emo_val || "N/A"}</td>
       <td className="p-3 border border-black">
         
           <button onClick={() => hview(item)} className="px-4 py-2 bg-black text-white rounded-md">

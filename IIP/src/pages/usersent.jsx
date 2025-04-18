@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 function usersent() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("All\n");
   const location = useLocation();
   const email = location.state?.email || localStorage.getItem("userEmail");
-
+ 
+    const navigate = useNavigate();
+  
+    const handleLogout = () => {
+      // Perform logout actions, like clearing session, localStorage, etc.
+      navigate('/');
+    };
+    const handsen=()=>{
+      navigate('/user');
+    }
   const filters = ["All\n", "Infrastructure\n", "Health\n", "Education\n","Taxproblems\n"];
   const [data,setdata]=useState([])
   useEffect(()=>{
@@ -17,8 +28,8 @@ function usersent() {
     
   }
   return (
-    <div className="p-2.5 w-full bg-white min-h-[screen]">
-    <div className="flex flex-col w-full bg-white shadow-sm h-[955px] max-w-[1371px]">
+    <div className="p-2.5 w-full bg-white min-h-[screen] ">
+    <div className="flex flex-col w-full bg-white shadow-sm h-[955px] max-w-[1371px] absolute inset-0 z-0 before:absolute before:inset-0 before:bg-[url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1470&q=80')] before:bg-cover before:bg-center before:opacity-20 before:blur-sm before:animate-fadeIn before:z-[-1] ">
       <div className="flex gap-1 items-center p-2.5">
         <div className="flex gap-11 items-center">
           <img
@@ -28,11 +39,11 @@ function usersent() {
           />
           <div className="text-base text-black">Sent</div>
           <div className="gap-2.5 text-base text-black">Response</div>
-          <Link to="/user">
-          <div className="gap-2.5 pl-2.5 text-base text-black">Send</div>
-          </Link>
-           <Link to="/">
-                    <div className="gap-2.5 pl-2.5 text-base text-black">Log out</div>
+            <Link to="/user" className="gap-2.5 pl-2.5 text-base text-black">
+              Send
+            </Link>
+           <Link to="/" className="gap-2.5 pl-2.5 text-base text-black">
+                    Log out
                     </Link>
         </div>
       </div>

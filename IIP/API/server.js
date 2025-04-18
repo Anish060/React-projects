@@ -28,7 +28,7 @@ app.get("/a_info",(req,res)=>{
     })
 })
 app.get("/mes",(req,res)=>{
-    const sql='SELECT * FROM a1_lo';
+    const sql='SELECT * FROM a1_lo order by emo_val desc';
     db.query(sql,(err,data)=>{
         if(err)return res.json(err);
         return res.json(data);
@@ -36,11 +36,11 @@ app.get("/mes",(req,res)=>{
 })
 
 app.post("/sen", (req, res) => {
-    const { contextt, issu,catt,name } = req.body;  // ✅ Extract values correctly
+    const { contextt, issu,catt,name,emo } = req.body;  // ✅ Extract values correctly
 
 
-    const sql = 'INSERT INTO a1_lo (Context, Issue,Category,username) VALUES (?, ?,?,?)';  // ✅ Use (?, ?)
-    db.query(sql, [contextt, issu,catt,name], (err, result) => {   // ✅ Use correct format
+    const sql = 'INSERT INTO a1_lo (Context, Issue,Category,username,emo_val) VALUES (?, ?,?,?,?)';  // ✅ Use (?, ?)
+    db.query(sql, [contextt, issu,catt,name,emo], (err, result) => {   // ✅ Use correct format
         if (err) {
             console.error("Error inserting data:", err);
             return res.status(500).json({ error: err.message });
